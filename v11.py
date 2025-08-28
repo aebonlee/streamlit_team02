@@ -1,4 +1,3 @@
-# app.py
 # =========================================================
 # AI 자기소개서 코칭 - Streamlit UI (v11)
 # =========================================================
@@ -30,94 +29,6 @@ try:
     LANGCHAIN_AVAILABLE = True
 except:
     LANGCHAIN_AVAILABLE = False
-
-# ================= 페이지 설정 및 기본 스타일 =================
-st.set_page_config(
-    page_title="AI 자기소개서 코칭",
-    page_icon="💬",
-    layout="wide",
-    initial_sidebar_state="collapsed"
-)
-
-MAIN_COLOR = "#22C55E"       # 메인 초록색
-SUB_COLOR = "#DCFCE7"        # 사용자 말풍선 배경
-BOT_COLOR = "#F3F4F6"        # 챗봇 말풍선 배경
-BG_COLOR = "#F5FBFB"         # 전체 배경색
-
-st.markdown(
-    f"""
-    <style>
-        body {{
-            background-color: {BG_COLOR};
-        }}
-
-        .chat-header-title {{
-            color: white;
-            font-weight: 600;
-        }}
-        .bottom-nav {{
-            position: fixed;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: white;
-            border-top: 1px solid #e0e0e0;
-            padding: 4px 8px;
-        }}
-        .bottom-nav button {{
-            width: 100%;
-            background: transparent;
-            border: none;
-            color: {MAIN_COLOR};
-            font-size: 14px;
-        }}
-        .bottom-nav .active {{
-            color: white;
-            background: {MAIN_COLOR};
-            border-radius: 12px;
-        }}
-        .nav-icon {{
-            font-size: 20px;
-            display: block;
-        }}
-        .onboard-wrapper {{
-            text-align: center;
-            padding: 60px 20px;
-        }}
-        .onboard-circle {{
-            width: 120px;
-            height: 120px;
-            border-radius: 60px;
-            background: {SUB_COLOR};
-            margin: 0 auto 24px auto;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            font-size:32px;
-        }}
-
-        .stMainBlockContainer {{
-            // padding: 0;
-        }}
-
-        .stVerticalBlock {{
-            // gap: 0;
-        }}
-
-        .stAppHeader {{
-            display: none;
-        }}
-
-        .header {{
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-        }}
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
 
 # ================= 세션 초기화 =================
 if "messages" not in st.session_state:
@@ -327,28 +238,133 @@ def save_conversation():
 
     return f"{filename}.{ext}"
 
-##########################################
-# UI 렌더링 함수
-##########################################
+
+# ================= 페이지 설정 및 기본 스타일 =================
+st.set_page_config(
+    page_title="AI 자기소개서 코칭",
+    page_icon="💬",
+    layout="wide",
+    initial_sidebar_state="collapsed"
+)
+
+MAIN_COLOR = "#22C55E"       # 메인 초록색
+SUB_COLOR = "#DCFCE7"        # 사용자 말풍선 배경
+BOT_COLOR = "#F3F4F6"        # 챗봇 말풍선 배경
+BG_COLOR = "#F5FBFB"         # 전체 배경색
+
+st.markdown(
+    f"""
+    <style>
+        body {{
+            background-color: {BG_COLOR};
+        }}
+
+        .chat-header-title {{
+            color: white;
+            font-weight: 600;
+        }}
+        .bottom-nav {{
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: white;
+            border-top: 1px solid #e0e0e0;
+            padding: 4px 8px;
+        }}
+        .bottom-nav button {{
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: {MAIN_COLOR};
+            font-size: 14px;
+        }}
+        .bottom-nav .active {{
+            color: white;
+            background: {MAIN_COLOR};
+            border-radius: 12px;
+        }}
+        .nav-icon {{
+            font-size: 20px;
+            display: block;
+        }}
+        .onboard-wrapper {{
+            text-align: center;
+            padding: 60px 20px;
+        }}
+        .onboard-circle {{
+            width: 120px;
+            height: 120px;
+            border-radius: 60px;
+            background: {SUB_COLOR};
+            margin: 0 auto 24px auto;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:32px;
+        }}
+
+        .stMainBlockContainer {{
+            // padding: 0;
+        }}
+
+        .stVerticalBlock {{
+            // gap: 0;
+        }}
+
+        .stAppHeader,.stDecoration {{
+            display: none;
+        }}
+
+        .header {{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 10;
+        }}
+
+        .stFileUploader button {{
+            display: none;
+        }}
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
+
+# ================= UI 렌더링 함수 =================
 
 def render_header(title: str) -> None:
     st.markdown(
-        f"<div class='header' style='background:{MAIN_COLOR}; padding:12px; text-align:center; color:white; font-weight:600'>{title}</div>",
+        f"<div class='header' style='background:{MAIN_COLOR};padding:12px; text-align:center; color:white; font-weight:600'>{title}</div>",
         unsafe_allow_html=True,
     )
 
 
+# def render_bottom_nav() -> None:
+#     st.markdown("<div class='bottom-nav'>", unsafe_allow_html=True)
+#     cols = st.columns(4)
+#     tabs = ["대화", "설정", "세부 설정", "계정"]
+#     icons = ["💬", "⚙️", "🛠️", "👤"]
+#     for col, tab, icon in zip(cols, tabs, icons):
+#         label = f"{icon} {tab}"
+#         if col.button(label, key=f"nav_{tab}", use_container_width=True):
+#             st.session_state.current_tab = tab
+#             st.rerun()
+#     st.markdown("</div>", unsafe_allow_html=True)
+
 def render_bottom_nav() -> None:
-    st.markdown("<div class='bottom-nav'>", unsafe_allow_html=True)
     cols = st.columns(4)
     tabs = ["대화", "설정", "세부 설정", "계정"]
     icons = ["💬", "⚙️", "🛠️", "👤"]
+    
     for col, tab, icon in zip(cols, tabs, icons):
         label = f"{icon} {tab}"
         if col.button(label, key=f"nav_{tab}", use_container_width=True):
             st.session_state.current_tab = tab
             st.rerun()
-    st.markdown("</div>", unsafe_allow_html=True)
+
 
 
 def render_onboarding():
@@ -386,19 +402,46 @@ def render_chat_tab():
                 f"<div style='text-align:left; background:{BOT_COLOR}; padding:10px; border-radius:18px; margin:4px 0'>{content_html}</div>",
                 unsafe_allow_html=True,
             )
+
     st.write("---")
     uploaded_file = st.file_uploader("📎 파일 첨부 (txt, docx)", type=["txt", "docx"])
+
+    # --- 상태 초기화 ---
+    st.session_state.setdefault("user_input", "")
+    st.session_state.setdefault("_submit", False)
+    st.session_state.setdefault("pending_input", None)
+
+    # 콜백: 엔터/버튼 → 제출 의도 표시 + 입력 비우기(여기서만 비움)
+    def submit_message():
+        v = st.session_state.user_input.strip()
+        if v:
+            st.session_state.pending_input = v   # 본문에서 사용할 버퍼
+            st.session_state.user_input = ""     # 위젯 값은 콜백에서만 리셋
+            st.session_state._submit = True
+
     col1, col2, col3, col4 = st.columns([5, 1, 1, 1])
     with col1:
-        user_input = st.text_input("메시지", placeholder="메시지를 입력하세요...", label_visibility="collapsed")
+        st.text_input(
+            "메시지",
+            key="user_input",
+            placeholder="메시지를 입력하세요...",
+            label_visibility="collapsed",
+            on_change=submit_message,   # 엔터로 제출
+        )
     with col2:
-        send = st.button("전송")
+        st.button("전송", on_click=submit_message)  # 버튼 제출
     with col3:
         save = st.button("저장하기")
     with col4:
         if st.button("📂"):
             st.session_state.show_saved = not st.session_state.get("show_saved", False)
-    if send and user_input:
+
+    # 제출 처리: 콜백이 남겨둔 pending_input을 사용
+    if st.session_state._submit and st.session_state.pending_input:
+        user_input = st.session_state.pending_input
+        st.session_state._submit = False
+        st.session_state.pending_input = None
+
         st.session_state.messages.append({
             "role": "user",
             "content": user_input,
@@ -412,9 +455,11 @@ def render_chat_tab():
             "time": datetime.datetime.now().strftime("%H:%M"),
         })
         st.rerun()
+
     if save:
         filename = save_conversation()
         st.success(f"{filename} 저장됨!")
+
     if st.session_state.get("show_saved", False):
         st.markdown("---")
         if not st.session_state.saved_files:
@@ -433,6 +478,7 @@ def render_chat_tab():
                 st.session_state.saved_files = []
                 st.success("모든 파일이 삭제되었습니다!")
                 st.session_state.show_saved = False
+
     render_bottom_nav()
 
 
