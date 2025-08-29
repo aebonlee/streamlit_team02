@@ -79,7 +79,7 @@ st.markdown(
     f"""
     <style>
         body {{ background:{BG}; }}
-        .header {{position:sticky; top:0; background:{MAIN}; color:white; padding:10px; z-index:10;}}
+        .header {{position:sticky; top:0; background:{MAIN}; color:white; padding:10px; margin-bottom: 20px; border-radius: 10px; z-index:10;}} ##### 헤더 디자인 수정 #####
         .bubble-user {{background:{USER_BG}; padding:10px; border-radius:16px; margin:6px 0; text-align:right}}
         .bubble-bot {{background:{BOT_BG}; padding:10px; border-radius:16px; margin:6px 0; text-align:left}}
         .metric-box {{border-radius:14px; padding:10px; background:white; border:1px solid #e5e7eb}}
@@ -460,7 +460,21 @@ with st.sidebar:
 
 st.markdown(f"<div class='header'><b>AI 자기소개서 코칭 +</b></div>", unsafe_allow_html=True)
 
-st.markdown(GUIDE)
+# st.markdown(GUIDE) ##### 이거 대신 토글 버튼 형태로 아래에 바꿈
+
+##### 사용 가이드 토글 버튼 #####
+# 가이드 표시 여부를 저장할 변수 (처음에는 False로 시작)
+if "show_guide" not in st.session_state:
+    st.session_state.show_guide = False
+
+# 사용 가이드 버튼 (토글 기능)
+if st.button("📖 사용 가이드", type="secondary"):
+    # 버튼을 누르면 현재 상태의 반대로 바뀜 (True ↔ False)
+    st.session_state.show_guide = not st.session_state.show_guide
+
+# 가이드가 보여야 할 때만 내용을 표시
+if st.session_state.show_guide:
+    st.markdown(GUIDE)
 
 # ================= 탭 =================
 tab_chat, tab_eval, tab_trend = st.tabs(["💬 대화", "🧭 자소서 평가", "📈 트렌드/기업"])
