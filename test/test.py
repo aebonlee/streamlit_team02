@@ -79,10 +79,15 @@ st.markdown(
     f"""
     <style>
         body {{ background:{BG}; }}
-        .header {{position:sticky; top:0; background:{MAIN}; color:white; padding:10px; margin-bottom: 20px; border-radius: 10px; z-index:10;}} ##### 헤더 디자인 수정 #####
+        .header {{position:sticky; top:0; background:{MAIN}; color:white; padding:34px; margin-bottom: 14px; border-radius: 10px; z-index:10; font-size: 4em; font-weight: 900; text-align: center;}} ##### 헤더 디자인 수정 #####
         .bubble-user {{background:{USER_BG}; padding:10px; border-radius:16px; margin:6px 0; text-align:right}}
         .bubble-bot {{background:{BOT_BG}; padding:10px; border-radius:16px; margin:6px 0; text-align:left}}
         .metric-box {{border-radius:14px; padding:10px; background:white; border:1px solid #e5e7eb}}
+        
+        .stTabs [data-baseweb="tab"] {{
+            height: 42px;
+            padding: 14px 21px;
+        }}
     </style>
     """,
     unsafe_allow_html=True,
@@ -454,34 +459,47 @@ with st.sidebar:
     if bing_key:
         os.environ["BING_API_KEY"] = bing_key
 
-    st.markdown("---")
-    st.caption(f"데이터 경로: **{DATA_DIR}** (자동 감지)")
-    st.caption("CSV: job_market.csv, macro_indicators.csv, skills_analysis.csv, tech_trends.csv")
+    # st.markdown("---")
+    # st.caption(f"데이터 경로: **{DATA_DIR}** (자동 감지)")
+    # st.caption("CSV: job_market.csv, macro_indicators.csv, skills_analysis.csv, tech_trends.csv")
 
 st.markdown(f"<div class='header'><b>AI 자기소개서 코칭 +</b></div>", unsafe_allow_html=True)
-
-# st.markdown(GUIDE) ##### 이거 대신 토글 버튼 형태로 아래에 바꿈
-
-##### 사용 가이드 토글 버튼 #####
-# 가이드 표시 여부를 저장할 변수 (처음에는 False로 시작)
-if "show_guide" not in st.session_state:
-    st.session_state.show_guide = False
-
-# 사용 가이드 버튼 (토글 기능)
-if st.button("📖 사용 가이드", type="secondary"):
-    # 버튼을 누르면 현재 상태의 반대로 바뀜 (True ↔ False)
-    st.session_state.show_guide = not st.session_state.show_guide
-
-# 가이드가 보여야 할 때만 내용을 표시
-if st.session_state.show_guide:
-    st.markdown(GUIDE)
 
 # ================= 탭 =================
 tab_chat, tab_eval, tab_trend = st.tabs(["💬 대화", "🧭 자소서 평가", "📈 트렌드/기업"])
 
 # --------- 💬 대화 ---------
 with tab_chat:
-    st.subheader("일반 코칭 대화")
+    # 가이드 표시 여부를 저장할 변수 (처음에는 False로 시작)
+    if "show_guide" not in st.session_state:
+        st.session_state.show_guide = False
+    
+    # 제목과 사용 가이드 버튼을 같은 행에 배치
+    col_title, col_spacer, col_button = st.columns([2, 0.3, 1])
+    
+    with col_title:
+        st.subheader("일반 코칭 대화")
+    
+    with col_spacer:
+        st.markdown("")  # 14px 정도의 공간
+    
+    with col_button:
+        # 사용 가이드 버튼 (토글 기능)
+        if st.button("📖 사용 가이드", type="secondary", key="guide_toggle", use_container_width=True):
+            # 버튼을 누르면 현재 상태의 반대로 바뀜 (True ↔ False)
+            st.session_state.show_guide = not st.session_state.show_guide
+    
+    # 가이드가 보여야 할 때만 챗봇 메시지 형태로 표시
+    if st.session_state.show_guide:
+        # 챗봇 메시지 스타일로 가이드 표시
+        st.markdown("""
+        <div style='background-color: #f0f2f6; padding: 15px; border-radius: 15px; margin: 10px 0; border-left: 4px solid #22C55E;'>
+            <div style='font-weight: bold; color: #22C55E; margin-bottom: 10px;'>🤖 AI 코치</div>
+            <div style='color: #374151; line-height: 1.6;'>
+        """, unsafe_allow_html=True)
+        st.markdown(GUIDE, unsafe_allow_html=True)
+        st.markdown("</div></div>", unsafe_allow_html=True)
+    
     user_q = st.text_area("메시지 입력", placeholder="예: 신입 프론트엔드 지원, 성장경험 문단 피드백")
     if st.button("답변 생성", type="primary"):
         # (NEW) 기업 데이터 질의 패턴 우선 응답 — UI 영향 없음, 텍스트만 출력
