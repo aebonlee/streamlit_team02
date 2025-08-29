@@ -1,0 +1,12 @@
+streamlit
+pandas
+numpy
+altair
+plotly
+requests
+beautifulsoup4
+python-docx
+reportlab
+langchain
+langchain-openai
+python-dotenv
