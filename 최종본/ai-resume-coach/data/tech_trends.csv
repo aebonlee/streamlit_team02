@@ -1,0 +1,73 @@
+﻿month,keyword,interest_value,category
+2025-03,Python,52,Backend
+2025-03,JavaScript,57,Frontend
+2025-03,React,71,Frontend
+2025-03,Node.js,74,Backend
+2025-03,AWS,75,Infrastructure
+2025-03,Docker,73,Infrastructure
+2025-03,Kubernetes,80,Infrastructure
+2025-03,AI/ML,72,Data/AI
+2025-03,Data Science,91,Data/AI
+2025-03,DevOps,77,Infrastructure
+2025-03,Spring,99,Backend
+2025-03,Django,99,Backend
+2025-04,Python,67,Backend
+2025-04,JavaScript,55,Frontend
+2025-04,React,75,Frontend
+2025-04,Node.js,65,Backend
+2025-04,AWS,66,Infrastructure
+2025-04,Docker,74,Infrastructure
+2025-04,Kubernetes,68,Infrastructure
+2025-04,AI/ML,87,Data/AI
+2025-04,Data Science,76,Data/AI
+2025-04,DevOps,95,Infrastructure
+2025-04,Spring,81,Backend
+2025-04,Django,84,Backend
+2025-05,Python,47,Backend
+2025-05,JavaScript,37,Frontend
+2025-05,React,50,Frontend
+2025-05,Node.js,55,Backend
+2025-05,AWS,54,Infrastructure
+2025-05,Docker,57,Infrastructure
+2025-05,Kubernetes,54,Infrastructure
+2025-05,AI/ML,67,Data/AI
+2025-05,Data Science,67,Data/AI
+2025-05,DevOps,68,Infrastructure
+2025-05,Spring,69,Backend
+2025-05,Django,81,Backend
+2025-06,Python,45,Backend
+2025-06,JavaScript,36,Frontend
+2025-06,React,40,Frontend
+2025-06,Node.js,55,Backend
+2025-06,AWS,57,Infrastructure
+2025-06,Docker,57,Infrastructure
+2025-06,Kubernetes,66,Infrastructure
+2025-06,AI/ML,53,Data/AI
+2025-06,Data Science,72,Data/AI
+2025-06,DevOps,62,Infrastructure
+2025-06,Spring,65,Backend
+2025-06,Django,67,Backend
+2025-07,Python,41,Backend
+2025-07,JavaScript,40,Frontend
+2025-07,React,55,Frontend
+2025-07,Node.js,43,Backend
+2025-07,AWS,56,Infrastructure
+2025-07,Docker,61,Infrastructure
+2025-07,Kubernetes,57,Infrastructure
+2025-07,AI/ML,61,Data/AI
+2025-07,Data Science,68,Data/AI
+2025-07,DevOps,59,Infrastructure
+2025-07,Spring,61,Backend
+2025-07,Django,69,Backend
+2025-08,Python,38,Backend
+2025-08,JavaScript,39,Frontend
+2025-08,React,48,Frontend
+2025-08,Node.js,51,Backend
+2025-08,AWS,56,Infrastructure
+2025-08,Docker,49,Infrastructure
+2025-08,Kubernetes,57,Infrastructure
+2025-08,AI/ML,67,Data/AI
+2025-08,Data Science,61,Data/AI
+2025-08,DevOps,69,Infrastructure
+2025-08,Spring,71,Backend
+2025-08,Django,67,Backend
