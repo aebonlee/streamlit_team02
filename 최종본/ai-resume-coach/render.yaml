@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: ai-resume-coach
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: streamlit run app.py --server.port $PORT --server.address 0.0.0.0
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: OPENAI_API_KEY
+        sync: false  # Render 대시보드에서 설정
+      - key: SERPAPI_API_KEY
+        sync: false  # 선택사항
+      - key: BING_API_KEY
+        sync: false  # 선택사항
+    autoDeploy: true
+    plan: free
